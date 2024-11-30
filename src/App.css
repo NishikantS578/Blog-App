@@ -1,4 +1,15 @@
 #root {
   max-width: 1280px;
+  width: 100%;
   text-align: center;
+}
+
+.paragraph-input:empty::before{
+  @apply text-gray-400;
+  content: "Tell your Story...";
+}
+
+.title-input:empty::before{
+  @apply text-gray-400;
+  content: "Title";
 }
