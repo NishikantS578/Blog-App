@@ -1,10 +1,19 @@
 import { useState } from "react"
+import { NavigateFunction, useNavigate } from "react-router";
 
-function handleBlogPublish(title: string, blog: string, setBlogs: any) {
-    setBlogs((prev: any) => { return [...prev, { title, blog }] })
+async function handleBlogPublish(title: string, blog: string, navigate: NavigateFunction) {
+    await fetch(import.meta.env.VITE_SERVER_URL+"/api/posts", {
+        method: "POST",
+        body: JSON.stringify({ title: title, blogContent: blog }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    navigate("/");
 }
 
-export default function WriteBlog(props: any) {
+export default function WriteBlog() {
+    const navigate = useNavigate();
     const [title, setTitle] = useState("")
     const [blog, setBlog] = useState("")
 
@@ -12,17 +21,23 @@ export default function WriteBlog(props: any) {
         <div
             className="title-input font-bold text-start text-4xl p-4 bg-gray-700 rounded-lg w-full" contentEditable={true}
             onInput={
-                (e: any) => {
-                    setTitle(e.target.textContent);
+                (e: React.FormEvent<HTMLDivElement>) => {
+                    const target = e.target as HTMLDivElement;
+                    if (target.textContent) {
+                        setTitle(target.textContent);
+                    }
                 }}></div>
 
         <div
             className="paragraph-input text-start text-xl p-2 bg-gray-700 rounded-lg min-h-[400px] w-full" contentEditable={true}
             onInput={
-                (e: any) => {
-                    setBlog(e.target.textContent);
+                (e: React.FormEvent<HTMLDivElement>) => {
+                    const target = e.target as HTMLDivElement;
+                    if (target.textContent) {
+                        setBlog(target.textContent);
+                    }
                 }}></div>
 
-        <button className="bg-blue-900 w-[200px] self-start" onClick={() => handleBlogPublish(title, blog, props.setBlogs)}>Publish</button>
+        <button className="bg-blue-900 w-[200px] self-start" onClick={() => handleBlogPublish(title, blog, navigate)}>Publish</button>
     </div >
 }
