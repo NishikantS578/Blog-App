@@ -20,7 +20,7 @@ export default function Blog() {
 
         {!loading && blogId && !blog && <div>There is No such Blog!!!</div>}
 
-        <div className="font-bold text-start text-4xl p-4 rounded-lg w-full" >{blogId && blog && blog.title}</div>
+        <div className="font-bold text-start text-4xl py-4 px-2 rounded-lg w-full" >{blogId && blog && blog.title}</div>
 
         <div className="text-start text-xl p-2 rounded-lg w-full break-words" >{blogId && blog && blog.blogContent}</div>
     </div >
