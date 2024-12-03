@@ -28,7 +28,7 @@
     
 - Specific Blog Page
 
-    <img src="previews/BlogsPage.png" alt="Blogs Page"></img>
+    <img src="previews/BlogPage.png" alt="Blogs Page"></img>
 
 - Publish Blog Page
 
