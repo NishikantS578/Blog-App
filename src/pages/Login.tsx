@@ -8,7 +8,7 @@ export default function Login() {
     const [alert, setAlert] = useState("");
     const navigate = useNavigate();
 
-    const { backendUrl, setIsLoggedIn } = useContext(AppContext);
+    const { backendUrl, login } = useContext(AppContext);
 
     async function handleLogin(e: React.FormEvent<HTMLFormElement>, email: string, password: string, setAlert: React.Dispatch<React.SetStateAction<string>>) {
         e.preventDefault();
@@ -31,7 +31,7 @@ export default function Login() {
         setAlert("");
         if (!data.success) { setAlert("Couldn't Login") }
         else {
-            setIsLoggedIn(true);
+            await login();
             navigate("/");
         }
     }

@@ -46,7 +46,7 @@ export default function Login() {
 
             <div className="text-red-400 drop-shadow-2xl self-start h-5">{alert}</div>
 
-            <input className="bg-white px-4 py-2 rounded-lg text-black" type="text" onChange={(e) => setOtpInput(e.target.value)} value={otpInput}></input>
+            <input className="bg-white px-4 py-2 rounded-lg text-black" type="text" onChange={(e) => setOtpInput(e.target.value)} placeholder="Enter OTP" value={otpInput}></input>
             <input className="bg-slate-700 px-4 py-2 rounded-lg active:bg-slate-500 cursor-pointer" type="submit" value={"Next"}></input>
         </form>
     </>

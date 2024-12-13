@@ -5,8 +5,8 @@ const AppContext = createContext(
         backendUrl: string,
         isLoggedIn: boolean,
         setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
-        userData: any,
-        setUserData: React.Dispatch<React.SetStateAction<any>>,
+        userData: { email: string, isAccountVerified: boolean } | undefined,
+        setUserData: React.Dispatch<React.SetStateAction<{ email: string, isAccountVerified: boolean } | undefined>>,
         login: () => Promise<boolean>,
     }
 );
@@ -14,7 +14,7 @@ const AppContext = createContext(
 function AppContextProvider(props: { children: ReactElement }) {
     const backendUrl = import.meta.env.VITE_SERVER_URL;
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userData, setUserData] = useState();
+    const [userData, setUserData] = useState<{ email: string, isAccountVerified: boolean } | undefined>();
 
     async function login(): Promise<boolean> {
         const res = await fetch(backendUrl + "/user", { credentials: 'include' });
@@ -22,8 +22,8 @@ function AppContextProvider(props: { children: ReactElement }) {
         if (!data.success) {
             return false;
         }
-        const userData = data.userData;
-        setUserData(userData);
+        const userdata = data.userData;
+        setUserData({ email: userdata.email, isAccountVerified: userdata.isAccountVerified });
         setIsLoggedIn(true);
         return true;
     }

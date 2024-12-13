@@ -16,6 +16,7 @@ export default function WriteBlog() {
     }, []);
 
     async function handleBlogPublish(title: string, blog: string, navigate: NavigateFunction) {
+        if (!userData) { return; }
         await fetch(import.meta.env.VITE_SERVER_URL + "/posts", {
             method: "POST",
             body: JSON.stringify({ title: title, author: userData.email.split("@")[0], blogContent: blog }),
